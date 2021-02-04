@@ -12,6 +12,14 @@ import javax.inject.Inject
 
 class PhotoRepository @Inject constructor(private val networkService: NetworkService) {
 
+    fun uploadPhoto(file: File, user: User) : Single<String>{
+
+        return MultipartBody.Part.createFormData("image",file.name,RequestBody.create("image/*".toMediaTypeOrNull(),file)).let {
+            return@let networkService.doImageUpload(it,user.id, user.accessToken).map { it.data.imageUrl }
+        }
+
+    }
+
 
 
 }
