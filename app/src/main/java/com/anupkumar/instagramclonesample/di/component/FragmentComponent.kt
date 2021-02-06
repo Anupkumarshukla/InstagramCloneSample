@@ -1,5 +1,6 @@
 package com.anupkumar.instagramclonesample.di.component
 
+import com.android.anupkumar.instagram.ui.profile.ProfileFragment
 import com.anupkumar.instagramclonesample.di.FragmentScope
 import com.anupkumar.instagramclonesample.di.module.FragmentModule
 import com.anupkumar.instagramclonesample.ui.home.HomeFragment
@@ -15,4 +16,6 @@ interface FragmentComponent {
     fun inject(fragment: HomeFragment)
 
     fun inject(fragment: PhotoFragment)
+
+    fun inject(fragment: ProfileFragment)
 }

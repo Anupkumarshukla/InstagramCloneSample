@@ -8,6 +8,10 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.RecyclerView
+import com.anupkumar.instagramclonesample.MyApp
+import com.anupkumar.instagramclonesample.di.component.DaggerViewHolderComponent
+import com.anupkumar.instagramclonesample.di.component.ViewHolderComponent
+import com.anupkumar.instagramclonesample.di.module.ViewHolderModule
 import com.anupkumar.instagramclonesample.utils.display.Toaster
 import javax.inject.Inject
 
@@ -26,14 +30,12 @@ RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(layoutId,par
         onCreate()
     }
 
-
      open fun bind(data: T){
          viewModel.updateData(data)
      }
 
-
-
     protected fun onCreate(){
+        injectDependencies(buildViewHolderComponent())
         lifecycleRegistry.setCurrentState(Lifecycle.State.INITIALIZED)
         lifecycleRegistry.setCurrentState(Lifecycle.State.CREATED)
         setupObservers()
@@ -57,9 +59,14 @@ RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(layoutId,par
 
 
 
-    // fun buildViewHolderComponent() =
+    private  fun buildViewHolderComponent() =
+        DaggerViewHolderComponent
+            .builder()
+            .applicationComponent((itemView.context.applicationContext as MyApp).applicationComponent)
+            .viewHolderModule(ViewHolderModule(this))
+            .build()
 
-
+    protected abstract fun injectDependencies(viewHolderComponent: ViewHolderComponent)
     fun showMessage(message: String) = Toaster.show(itemView.context, message)
 
     fun showMessage(@StringRes resId: Int) = showMessage(itemView.context.getString(resId))

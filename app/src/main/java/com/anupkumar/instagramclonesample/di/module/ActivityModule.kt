@@ -6,6 +6,7 @@ import com.anupkumar.instagramclonesample.data.repository.PostRepository
 import com.anupkumar.instagramclonesample.data.repository.UserRepository
 import com.anupkumar.instagramclonesample.ui.base.BaseActivity
 import com.anupkumar.instagramclonesample.ui.login.LoginViewModel
+import com.anupkumar.instagramclonesample.ui.main.MainSharedViewModel
 import com.anupkumar.instagramclonesample.ui.main.MainViewModel
 import com.anupkumar.instagramclonesample.ui.photo.PhotoViewModel
 import com.anupkumar.instagramclonesample.ui.splash_screen.SplashActivity
@@ -50,10 +51,14 @@ class ActivityModule(private val activity: BaseActivity<*>) {
         MainViewModel(schedulerProvider,compositeDisposable,networkHelper)
     }).get(MainViewModel::class.java)
 
-
-
-
-
-
+    @Provides
+    fun provideMainSharedViewModel(
+        schedulerProvider: SchedulerProvider,
+        compositeDisposable: CompositeDisposable,
+        networkHelper: NetworkHelper
+    ): MainSharedViewModel = ViewModelProviders.of(
+        activity!!, ViewModelProviderFactory(MainSharedViewModel::class) {
+            MainSharedViewModel(schedulerProvider, compositeDisposable, networkHelper)
+        }).get(MainSharedViewModel::class.java)
 
 }

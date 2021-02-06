@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<T : Any, VH :  BaseItemViewHolder<T,BaseItemViewModel<T>>>(
+abstract class BaseAdapter<T : Any, VH :  BaseItemViewHolder<T,out BaseItemViewModel<T>>>(
     parentLifecycle : Lifecycle,
     private val dataList: ArrayList<T>
     ) : RecyclerView.Adapter<VH>() {
