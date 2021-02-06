@@ -9,8 +9,7 @@ object Logger {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
     }
 
-    fun d(tag: String, s: String, vararg params: Any) =
-        Timber.tag(tag).d(s, params)
+    fun d(tag: String, s: String, vararg params: Any) = Timber.tag(tag).d(s, params)
 
     fun d(tag: String, throwable: Throwable, s: String, vararg params: Any) =
         Timber.tag(tag).d(throwable, s, params)

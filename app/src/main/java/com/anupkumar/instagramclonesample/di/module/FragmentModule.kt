@@ -2,6 +2,7 @@ package com.anupkumar.instagramclonesample.di.module
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.anupkumar.instagramclonesample.data.model.Post
 import com.anupkumar.instagramclonesample.data.repository.PhotoRepository
 import com.anupkumar.instagramclonesample.data.repository.PostRepository
 import com.anupkumar.instagramclonesample.data.repository.UserRepository
@@ -17,6 +18,7 @@ import com.mindorks.paracamera.Camera
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.processors.PublishProcessor
 import java.io.File
 
 @Module
@@ -37,9 +39,11 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
     fun provideHomeViewModel(
         schedulerProvider: SchedulerProvider,
         compositeDisposable: CompositeDisposable,
-        networkHelper: NetworkHelper
+        networkHelper: NetworkHelper,
+        userRepository: UserRepository,
+        postRepository: PostRepository,
     ): HomeViewModel = ViewModelProviders.of(fragment, ViewModelProviderFactory(HomeViewModel::class){
-        HomeViewModel(schedulerProvider,compositeDisposable,networkHelper)
+        HomeViewModel(schedulerProvider,compositeDisposable,networkHelper,userRepository,postRepository,ArrayList(), PublishProcessor.create())
     }).get(HomeViewModel::class.java)
 
     @Provides

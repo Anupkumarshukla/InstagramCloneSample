@@ -10,7 +10,8 @@ import com.anupkumar.instagramclonesample.data.remote.request.PostCreationReques
 import io.reactivex.Single
 import javax.inject.Inject
 
-class PostRepository @Inject constructor(private val networkService: NetworkService,
+class PostRepository @Inject constructor(
+    private val networkService: NetworkService,
     private val databaseService: DatabaseService) {
 
     fun createPost(imgUrl: String, imgWidth: Int, imgHeight: Int, user: User) : Single<Post> = networkService.doPostCreationCall(
@@ -18,4 +19,13 @@ class PostRepository @Inject constructor(private val networkService: NetworkServ
             Post(it.data.id, it.data.imageUrl, it.data.imageWidth, it.data.imageHeight,
             Post.User(user.id, user.name, user.profilePicUrl), mutableListOf(), it.data.createdAt)
         }
+
+    fun fetchHomePostList(firstPostId: String?, lastPostId: String?, user: User): Single<List<Post>> {
+        return networkService.doHomePostListCall(
+            firstPostId,
+            lastPostId,
+            user.id,
+            user.accessToken
+        ).map { it.data }
+    }
 }
