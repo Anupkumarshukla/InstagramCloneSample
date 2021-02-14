@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+// Dagger Hilt
+apply plugin: 'dagger.hilt.android.plugin'
+
 android {
     compileSdkVersion rootProject.ext.compile_sdk_version
 
@@ -62,6 +65,10 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    // KTX
+    implementation "androidx.activity:activity-ktx:1.2.0"
 
     // Lifecycle Annotations
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
@@ -72,6 +79,11 @@ dependencies {
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Dagger Hilt
+
+    implementation "com.google.dagger:hilt-android:2.31.2-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.31.2-alpha"
 
     // Database
     implementation "androidx.room:room-runtime:$room_version"
