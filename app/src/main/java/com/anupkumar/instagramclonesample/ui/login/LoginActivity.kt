@@ -7,12 +7,13 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.lifecycle.Observer
 import com.anupkumar.instagramclonesample.R
-import com.anupkumar.instagramclonesample.di.component.ActivityComponent
 import com.anupkumar.instagramclonesample.ui.base.BaseActivity
 import com.anupkumar.instagramclonesample.ui.main.MainActivity
 import com.anupkumar.instagramclonesample.utils.common.Status
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_login.*
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<LoginViewModel>() {
 
     companion object{
@@ -22,9 +23,9 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     override fun provideLayoutId(): Int  = R.layout.activity_login
 
 
-    override fun injectDependencies(activityComponent: ActivityComponent) {
+/*    override fun injectDependencies(activityComponent: ActivityComponent) {
         activityComponent.inject(this)
-    }
+    }*/
 
     override fun setupView(savedInstanceState: Bundle?) {
         et_email.addTextChangedListener(object : TextWatcher{

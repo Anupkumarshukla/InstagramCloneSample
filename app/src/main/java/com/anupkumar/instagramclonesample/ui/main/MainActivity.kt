@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.android.anupkumar.instagram.ui.profile.ProfileFragment
 import com.anupkumar.instagramclonesample.R
-import com.anupkumar.instagramclonesample.di.component.ActivityComponent
 import com.anupkumar.instagramclonesample.ui.base.BaseActivity
 import com.anupkumar.instagramclonesample.ui.home.HomeFragment
 import com.anupkumar.instagramclonesample.ui.photo.PhotoFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel>() {
 
     companion object {
@@ -26,9 +27,9 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override fun provideLayoutId(): Int = R.layout.activity_main
 
-    override fun injectDependencies(activityComponent: ActivityComponent) {
+/*    override fun injectDependencies(activityComponent: ActivityComponent) {
         activityComponent.inject(this)
-    }
+    }*/
 
     override fun setupView(savedInstanceState: Bundle?) {
         bottomNavigation.run {

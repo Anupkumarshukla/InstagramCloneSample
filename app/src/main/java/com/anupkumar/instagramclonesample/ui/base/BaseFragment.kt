@@ -10,10 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.anupkumar.instagramclonesample.MyApp
-import com.anupkumar.instagramclonesample.di.component.DaggerFragmentComponent
-import com.anupkumar.instagramclonesample.di.component.FragmentComponent
 import com.anupkumar.instagramclonesample.di.module.FragmentModule
 import com.anupkumar.instagramclonesample.utils.display.Toaster
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 abstract class BaseFragment<VM :  BaseViewModel> : Fragment() {
@@ -22,18 +21,18 @@ abstract class BaseFragment<VM :  BaseViewModel> : Fragment() {
     lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injectDependencies(buildFragmentComponent())
+       // injectDependencies(buildFragmentComponent())
         super.onCreate(savedInstanceState)
         setupObservers()
         viewModel.onCreate()
     }
 
-    private fun buildFragmentComponent() =
+ /*   private fun buildFragmentComponent() =
         DaggerFragmentComponent
             .builder()
             .applicationComponent((context!!.applicationContext as MyApp).applicationComponent)
             .fragmentModule(FragmentModule(this))
-            .build()
+            .build()*/
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
     = inflater.inflate(provideLayoutId(),container,false)
@@ -59,7 +58,7 @@ abstract class BaseFragment<VM :  BaseViewModel> : Fragment() {
     @LayoutRes
     protected abstract fun provideLayoutId(): Int
 
-    protected abstract fun injectDependencies(fragmentComponent: FragmentComponent)
+  //  protected abstract fun injectDependencies(fragmentComponent: FragmentComponent)
 
     protected abstract fun setupView(view: View)
 

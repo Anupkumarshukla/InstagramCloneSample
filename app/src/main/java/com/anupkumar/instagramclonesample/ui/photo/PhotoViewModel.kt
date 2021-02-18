@@ -7,25 +7,30 @@ import com.anupkumar.instagramclonesample.data.model.User
 import com.anupkumar.instagramclonesample.data.repository.PhotoRepository
 import com.anupkumar.instagramclonesample.data.repository.PostRepository
 import com.anupkumar.instagramclonesample.data.repository.UserRepository
+import com.anupkumar.instagramclonesample.di.TempDirectory
 import com.anupkumar.instagramclonesample.ui.base.BaseViewModel
 import com.anupkumar.instagramclonesample.utils.common.Event
 import com.anupkumar.instagramclonesample.utils.common.FileUtils
 import com.anupkumar.instagramclonesample.utils.common.Resource
 import com.anupkumar.instagramclonesample.utils.network.NetworkHelper
 import com.anupkumar.instagramclonesample.utils.rx.SchedulerProvider
+import dagger.Provides
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import java.io.File
 import java.io.InputStream
+import javax.inject.Inject
 
-class PhotoViewModel(
+@HiltViewModel
+class PhotoViewModel @Inject constructor(
     schedulerProvider: SchedulerProvider,
     compositeDisposable: CompositeDisposable,
     networkHelper: NetworkHelper,
     private val userRepository: UserRepository,
     private val photoRepository: PhotoRepository,
     private val postRepository: PostRepository,
-    private val directory: File) :
+    @TempDirectory private val directory: File) :
     BaseViewModel(schedulerProvider,compositeDisposable,networkHelper) {
 
     private val user: User = userRepository.getCurrentUser()!!

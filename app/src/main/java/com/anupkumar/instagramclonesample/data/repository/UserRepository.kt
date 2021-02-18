@@ -1,6 +1,5 @@
 package com.anupkumar.instagramclonesample.data.repository
 
-import com.anupkumar.instagramclonesample.data.local.db.DatabaseService
 import com.anupkumar.instagramclonesample.data.local.prefs.UserPreferences
 import com.anupkumar.instagramclonesample.data.model.User
 import com.anupkumar.instagramclonesample.data.remote.NetworkService
@@ -12,7 +11,6 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepository @Inject constructor(private val networkService: NetworkService,
-                                         private val databaseService: DatabaseService,
                                          private val userPreferences: UserPreferences) {
 
     fun saveCurrentUser(user: User) {

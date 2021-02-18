@@ -1,15 +1,16 @@
 package com.anupkumar.instagramclonesample.ui.base
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.anupkumar.instagramclonesample.MyApp
-import com.anupkumar.instagramclonesample.di.component.ActivityComponent
-import com.anupkumar.instagramclonesample.di.component.DaggerActivityComponent
 import com.anupkumar.instagramclonesample.di.module.ActivityModule
 import com.anupkumar.instagramclonesample.utils.display.Toaster
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
@@ -18,7 +19,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injectDependencies(buildActivityComponent())
+       // injectDependencies(buildActivityComponent())
         super.onCreate(savedInstanceState)
         setContentView(provideLayoutId())
         setupObservers()
@@ -28,12 +29,12 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
 
 
 
-    private fun buildActivityComponent() =
+  /*  private fun buildActivityComponent() =
         DaggerActivityComponent
         .builder()
         .applicationComponent((application as MyApp).applicationComponent)
         .activityModule(ActivityModule(this))
-        .build()
+        .build()*/
 
 
 
@@ -54,7 +55,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     @LayoutRes
     protected abstract fun provideLayoutId(): Int
 
-    protected abstract fun injectDependencies(activityComponent: ActivityComponent)
+  //  protected abstract fun injectDependencies(activityComponent: ActivityComponent)
 
     protected abstract fun setupView(savedInstanceState: Bundle?)
 

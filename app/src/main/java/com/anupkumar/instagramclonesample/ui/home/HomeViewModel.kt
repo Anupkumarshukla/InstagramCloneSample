@@ -1,5 +1,6 @@
 package com.anupkumar.instagramclonesample.ui.home
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.anupkumar.instagramclonesample.data.model.Post
 import com.anupkumar.instagramclonesample.data.model.User
@@ -9,11 +10,14 @@ import com.anupkumar.instagramclonesample.ui.base.BaseViewModel
 import com.anupkumar.instagramclonesample.utils.common.Resource
 import com.anupkumar.instagramclonesample.utils.network.NetworkHelper
 import com.anupkumar.instagramclonesample.utils.rx.SchedulerProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     schedulerProvider: SchedulerProvider,
     compositeDisposable: CompositeDisposable,
     networkHelper: NetworkHelper,

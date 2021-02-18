@@ -8,12 +8,15 @@ import com.anupkumar.instagramclonesample.ui.base.BaseViewModel
 import com.anupkumar.instagramclonesample.utils.common.*
 import com.anupkumar.instagramclonesample.utils.network.NetworkHelper
 import com.anupkumar.instagramclonesample.utils.rx.SchedulerProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class LoginViewModel(schedulerProvider: SchedulerProvider,
-                     compositeDisposable: CompositeDisposable,
-                     networkHelper: NetworkHelper,
-                     private val userRepository: UserRepository):BaseViewModel(schedulerProvider,compositeDisposable,networkHelper) {
+@HiltViewModel
+class LoginViewModel @Inject constructor(schedulerProvider: SchedulerProvider,
+                                         compositeDisposable: CompositeDisposable,
+                                         networkHelper: NetworkHelper,
+                                         private val userRepository: UserRepository):BaseViewModel(schedulerProvider,compositeDisposable,networkHelper) {
 
      val validationsList: MutableLiveData<List<Validation>> = MutableLiveData()
 

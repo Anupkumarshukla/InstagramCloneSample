@@ -1,5 +1,6 @@
 package com.anupkumar.instagramclonesample.di.module
 
+import android.app.Activity
 import androidx.lifecycle.ViewModelProviders
 import com.anupkumar.instagramclonesample.data.repository.PhotoRepository
 import com.anupkumar.instagramclonesample.data.repository.PostRepository
@@ -16,15 +17,23 @@ import com.anupkumar.instagramclonesample.utils.network.NetworkHelper
 import com.anupkumar.instagramclonesample.utils.rx.SchedulerProvider
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 import io.reactivex.disposables.CompositeDisposable
 import java.io.File
 
 
 @Module
-class ActivityModule(private val activity: BaseActivity<*>) {
-
+@InstallIn(ActivityComponent::class)
+class ActivityModule{
 
     @Provides
+    fun provideBaseActivity(activity: Activity) : BaseActivity<*> {
+        return activity as BaseActivity<*>
+    }
+//(private val activity: BaseActivity<*>)
+
+  /*  @Provides
     fun provideSplashViewModel(
         schedulerProvider: SchedulerProvider,
         compositeDisposable: CompositeDisposable,
@@ -59,6 +68,6 @@ class ActivityModule(private val activity: BaseActivity<*>) {
     ): MainSharedViewModel = ViewModelProviders.of(
         activity!!, ViewModelProviderFactory(MainSharedViewModel::class) {
             MainSharedViewModel(schedulerProvider, compositeDisposable, networkHelper)
-        }).get(MainSharedViewModel::class.java)
+        }).get(MainSharedViewModel::class.java)*/
 
 }

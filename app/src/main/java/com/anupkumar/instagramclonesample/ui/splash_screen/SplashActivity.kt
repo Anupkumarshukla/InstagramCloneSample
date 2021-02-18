@@ -5,11 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.anupkumar.instagramclonesample.R
-import com.anupkumar.instagramclonesample.di.component.ActivityComponent
 import com.anupkumar.instagramclonesample.ui.base.BaseActivity
 import com.anupkumar.instagramclonesample.ui.login.LoginActivity
 import com.anupkumar.instagramclonesample.ui.main.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<SplashViewModel>() {
 
     companion object{
@@ -18,9 +19,9 @@ class SplashActivity : BaseActivity<SplashViewModel>() {
 
     override fun provideLayoutId(): Int = R.layout.activity_splash
 
-    override fun injectDependencies(activityComponent: ActivityComponent) {
+ /*   override fun injectDependencies(activityComponent: ActivityComponent) {
         activityComponent.inject(this)
-    }
+    }*/
 
     override fun setupView(savedInstanceState: Bundle?) {
 

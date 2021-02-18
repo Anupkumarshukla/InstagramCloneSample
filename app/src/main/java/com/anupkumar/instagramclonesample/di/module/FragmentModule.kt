@@ -21,21 +21,30 @@ import com.anupkumar.instagramclonesample.utils.rx.SchedulerProvider
 import com.mindorks.paracamera.Camera
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.FragmentComponent
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.PublishProcessor
 import java.io.File
 
 @Module
-class FragmentModule(private val fragment: BaseFragment<*>) {
+@InstallIn(FragmentComponent::class)
+class FragmentModule {
 
     @Provides
-    fun provideLinearLayoutManager(): LinearLayoutManager = LinearLayoutManager(fragment.context)
+    fun provideLinearLayoutManager(fragment: BaseFragment<*>): LinearLayoutManager = LinearLayoutManager(fragment.context)
 
     @Provides
-    fun providePostsAdapter() = PostsAdapter(fragment.lifecycle, ArrayList())
+    fun provideBaseFragment(fragment: Fragment) : BaseFragment<*> {
+        return fragment as BaseFragment<*>
+    }
 
     @Provides
-    fun provideCamera() = Camera.Builder()
+    fun providePostsAdapter(fragment: BaseFragment<*>) = PostsAdapter(fragment.lifecycle, ArrayList())
+
+    @Provides
+    fun provideCamera(fragment: BaseFragment<*>) = Camera.Builder()
         .resetToCorrectOrientation(true)
         .setTakePhotoRequestCode(1)
         .setDirectory("temp")
@@ -45,7 +54,7 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
         .setImageHeight(500)
         .build(fragment)
 
-    @Provides
+/*    @Provides
     fun provideHomeViewModel(
         schedulerProvider: SchedulerProvider,
         compositeDisposable: CompositeDisposable,
@@ -92,6 +101,6 @@ class FragmentModule(private val fragment: BaseFragment<*>) {
     ): MainSharedViewModel = ViewModelProviders.of(
         fragment.activity!!, ViewModelProviderFactory(MainSharedViewModel::class) {
             MainSharedViewModel(schedulerProvider, compositeDisposable, networkHelper)
-        }).get(MainSharedViewModel::class.java)
+        }).get(MainSharedViewModel::class.java)*/
 
 }

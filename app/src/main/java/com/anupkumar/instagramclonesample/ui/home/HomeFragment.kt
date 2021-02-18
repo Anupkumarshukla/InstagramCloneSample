@@ -6,15 +6,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anupkumar.instagramclonesample.R
-import com.anupkumar.instagramclonesample.di.component.FragmentComponent
 import com.anupkumar.instagramclonesample.ui.base.BaseFragment
 import com.anupkumar.instagramclonesample.ui.home.post.PostsAdapter
 import com.anupkumar.instagramclonesample.ui.main.MainSharedViewModel
 import com.anupkumar.instagramclonesample.utils.log.Logger
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.components.FragmentComponent
 import kotlinx.android.synthetic.main.fragment_home.*
 
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel>() {
 
     companion object {
@@ -40,9 +42,9 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
 
     override fun provideLayoutId(): Int = R.layout.fragment_home
 
-    override fun injectDependencies(fragmentComponent: FragmentComponent) {
-        fragmentComponent.inject(this)
-    }
+//    override fun injectDependencies(fragmentComponent: FragmentComponent) {
+//        fragmentComponent.inject(this)
+//    }
 
     override fun setupObservers() {
         super.setupObservers()

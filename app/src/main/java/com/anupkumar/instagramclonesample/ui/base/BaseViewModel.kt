@@ -10,6 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import java.net.HttpURLConnection
 import javax.net.ssl.HttpsURLConnection
 
+
 abstract class BaseViewModel(protected val schedulerProvider: SchedulerProvider,
                              protected val compositeDisposable: CompositeDisposable,
                              protected val networkHelper: NetworkHelper) : ViewModel(){

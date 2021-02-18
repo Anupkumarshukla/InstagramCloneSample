@@ -6,7 +6,6 @@ import android.view.ViewParent
 import androidx.lifecycle.Observer
 import com.anupkumar.instagramclonesample.R
 import com.anupkumar.instagramclonesample.data.model.Post
-import com.anupkumar.instagramclonesample.di.component.ViewHolderComponent
 import com.anupkumar.instagramclonesample.ui.base.BaseItemViewHolder
 import com.anupkumar.instagramclonesample.ui.base.BaseItemViewModel
 import com.anupkumar.instagramclonesample.utils.common.GlideHelper
@@ -15,9 +14,11 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_view_post.view.*
 
 class PostItemViewHolder(parent: ViewGroup) : BaseItemViewHolder<Post, PostItemViewModel> (R.layout.item_view_post, parent){
-    override fun injectDependencies(viewHolderComponent: ViewHolderComponent) {
+
+
+/*    override fun injectDependencies(viewHolderComponent: ViewHolderComponent) {
         viewHolderComponent.inject(this)
-    }
+    }*/
 
     override fun setupObservers() {
         super.setupObservers()

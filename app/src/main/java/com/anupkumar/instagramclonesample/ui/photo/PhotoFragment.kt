@@ -5,14 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.anupkumar.instagramclonesample.R
-import com.anupkumar.instagramclonesample.di.component.FragmentComponent
 import com.anupkumar.instagramclonesample.ui.base.BaseFragment
 import com.anupkumar.instagramclonesample.ui.base.BaseViewModel
 import com.anupkumar.instagramclonesample.ui.home.HomeFragment
 import com.mindorks.paracamera.Camera
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_photo.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class PhotoFragment : BaseFragment<PhotoViewModel>() {
 
     companion object{
@@ -31,9 +32,9 @@ class PhotoFragment : BaseFragment<PhotoViewModel>() {
 
     override fun provideLayoutId(): Int  = R.layout.fragment_photo
 
-    override fun injectDependencies(fragmentComponent: FragmentComponent) {
+/*    override fun injectDependencies(fragmentComponent: FragmentComponent) {
         fragmentComponent.inject(this)
-    }
+    }*/
 
     override fun setupView(view: View) {
         view_gallery.setOnClickListener {
